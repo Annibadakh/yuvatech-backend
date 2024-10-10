@@ -1,0 +1,422 @@
+
+//create a user
+###
+POST http://localhost:5000/users
+Content-Type: application/json
+
+{
+    "name": "Atharva",
+    "email": "admin@gmail.com",
+    "password": "123456",
+    "confPassword":"123456",
+    "role": "admin"
+}
+
+//create a user
+###
+POST http://localhost:5000/users
+Content-Type: application/json
+
+{
+    "name":"Pankzzzaj",
+    "email":"pankaj@gmail.com",
+    "password":"123456",
+    "confPassword":"1234567890",
+    "role":"student"
+}
+
+###
+POST http://localhost:5000/contact
+Content-Type: application/json
+
+{
+    "name":"Pankzzzaj",
+    "email":"pankaj@gmail.com",
+    "phone_number":"123456",
+    "message":"student"
+}
+
+###
+GET  http://localhost:5000/contacts
+
+###
+//get all user
+
+GET http://localhost:5000/users
+
+###
+//get single user
+GET http://localhost:5000/users/2634ecb9-1c1b-4e10-99f2-26994de4f3ac
+###
+//Update a user
+PATCH   http://localhost:5000/users/841b36e7-9c66-4808-a43a-45f108712598
+Content-Type: application/json
+
+{
+    "name":"Pankaj Argade",
+    "email":"pankazzj@gmail.com",
+    "password":"123456",
+    "confPassword":"123456",
+    "role":"student"
+}
+
+###
+//delete users
+DELETE    http://localhost:5000/users/c6b32c63-06a2-4844-93f0-fee0c19c842d
+###
+//Login in User
+
+
+POST https://server.yuvatech-computers.org.in/login 
+Content-Type: application/json
+
+{
+    "email":"admin@gmail.com",
+    "password":"123456"
+}
+
+###
+PATCH http://localhost:5000/updatepassword
+Content-Type: application/json
+
+{
+    "oldPassword":"1234567",
+    "newPassword":"123456",
+    "confPassword" :"123456"
+}
+
+
+
+
+
+###
+POST http://localhost:5000/login
+Content-Type: application/json
+
+{
+    "email":"aniket@gmail.com",
+    "password":"123456"
+  //  "email": "nikitac3@gmail.com",
+    //"password": "123456"
+}
+
+###
+POST http://localhost:5000/login
+Content-Type: application/json
+
+{
+    "email":"manish@Gmail.com",
+    "password":"123"
+  //  "email": "nikitac3@gmail.com",
+    //"password": "123456"
+}
+
+###
+GET http://localhost:5000/me
+
+
+###
+GET http://localhost:5000/myprofile
+
+###
+GET http://localhost:5000/profile
+
+###
+GET http://localhost:5000/mypayments
+
+###
+GET http://localhost:5000/myprofile
+
+
+
+###
+PATCH http://localhost:5000/myprofile
+Content-Type: application/json
+
+{
+    "address": "Kopargaon"
+}
+
+
+
+
+###
+DELETE http://localhost:5000/logout
+
+
+###
+//create a course
+POST http://localhost:5000/courses
+Content-Type: application/json
+
+{
+    "name": "Java",
+    "description": "This is a course description for Python.",
+    
+    "price": 2999,
+    "examFees": 500,
+    "courseFees": 3499,
+    "duration": 30,
+    "status": "active"
+    
+}
+
+###
+//get all courses
+
+GET http://localhost:5000/courses
+
+###
+//get single course
+GET http://localhost:5000/courses/xzetyku
+
+###
+//update a course
+PATCH   http://localhost:5000/courses/xzetyku
+Content-Type: application/json
+
+{
+    "name": "Python",
+    "price":3999
+}
+
+###
+//delete a course
+DELETE    http://localhost:5000/courses/awef8qv
+
+//create a user
+###
+POST http://localhost:5000/users
+Content-Type: application/json
+
+{
+    "name":"Sanket",
+    "email":"sanket@gmail.com",
+    "password":"123456",
+    "confPassword":"123456",
+    "role":"student"
+}
+
+
+###
+POST http://localhost:5000/courses/enroll
+Content-Type: application/json
+
+{
+    "courseId": "tinqq1b",
+    "studentId": "12" 
+}
+
+
+###
+POST http://localhost:5000/courses/3ooo0xg/enroll
+
+
+###
+GET http://localhost:5000/enroll/1ksngec
+
+###
+//create a course
+POST http://localhost:5000/enroll
+Content-Type: application/json
+
+{
+    "courseId": "tinqq1b", 
+    "studentId": 12
+ 
+    
+}
+
+###
+//get all enrollments
+
+GET http://localhost:5000/enroll
+
+###
+GET http://localhost:5000/totalenrollments
+
+
+###
+GET http://localhost:5000/myenrollments
+Content-Type: application/json
+
+###
+GET http://localhost:5000/getenrollment/6e1zmup
+
+
+###
+//get enrollmemtbyid course
+GET http://localhost:5000/enroll/36wwg0n
+
+###
+//update a course
+PATCH   http://localhost:5000/enroll/1
+Content-Type: application/json
+
+{
+      "status": "completed"
+
+}
+
+###
+//delete a course
+DELETE    http://localhost:5000/enroll/3
+
+###
+GET http://localhost:5000/paymentsbalance/jzqxfon	
+
+
+
+###
+POST http://localhost:5000/students
+Content-Type: application/json
+
+{
+    "firstName": "Pankaj",
+    "middleName": "Somnath",
+    "lastName": "Argade",
+    "email": "pankajaa@example.com",
+    "mobile": "1234567890",
+    "dob": "2004-06-30",
+    "city": "Kopargaon",
+    "state": "Maharashtra",
+    "pincode": "423601",
+    "occupation": "Software Developer",
+    "address": "Sanjivani COllege Of Engineering",
+    "gender": "male"
+}
+
+
+###
+//get all students
+
+GET http://localhost:5000/students
+
+###
+//get single studentby Id
+GET http://localhost:5000/students/g62dcex
+
+
+###
+//update a student
+PATCH   http://localhost:5000/students/2
+Content-Type: application/json
+
+{
+    "firstName": "Nikita",
+  "middleName": "Bhaskar",
+  "lastName": "Bhor",
+    "email": "nikita@example.com"
+}
+
+###
+//delete a student
+DELETE    http://localhost:5000/students/2
+
+
+
+
+
+###
+//create a course
+POST http://localhost:5000/payments
+Content-Type: application/json
+
+{
+    "enrollmentId": "2", 
+    "amount": 1999,
+    "paymentMethod":"Cash"
+   
+    
+}
+
+###
+//get all payments
+
+GET https://yuvatech-computers.org.in/yts
+
+###
+GET http://localhost:5000/financials
+
+###
+//get single course
+GET http://localhost:5000/payments/29hubz7
+
+###
+PATCH   http://localhost:5000/payments/0dw54ri	
+Content-Type: application/json
+
+{
+    "amount" : 100
+}
+
+###
+//delete a course
+DELETE    http://localhost:5000/payments/1
+
+###
+POST  http://localhost:5000/set-fees
+Content-Type: application/json
+
+{
+    "enrollmentId": "75rpd0e",
+    "discount": 50 
+}
+
+
+
+
+
+
+
+
+
+
+# ###
+# POST http://localhost:5000/students-create
+# Content-Type: application/json
+
+# {
+#     "name": "nikita",
+#     "email": "nikitac3@gmail.com",
+#     "password": "123456",
+#     "confPassword": "123456",
+#     "branch":"Yeola"
+# }
+
+
+
+
+# ###
+# //get all students
+# GET http://localhost:5000/get-students
+
+# ###
+# //get single student
+# GET http://localhost:5000/students/03450586-68fb-44bd-b7be-4ce587ff732c
+
+# ###
+# //update a student
+# PATCH http://localhost:5000/students/03450586-68fb-44bd-b7be-4ce587ff732c
+# Content-Type: application/json
+
+# {
+#     "name": "sanketdummy",
+#     "email": "sanket@gmail.com",
+#     "password": "123456"
+# }
+
+
+# ###
+# //delete a student
+# DELETE http://localhost:5000/students-delete/03450586-68fb-44bd-b7be-4ce587ff732c
+
+
+# ###
+# GET http://localhost:5000/studentme
+
+# ###
+# DELETE http://localhost:5000/studentlogout
+
+# ###
+# POST http://localhost:5000/studentlogin
