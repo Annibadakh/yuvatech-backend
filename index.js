@@ -174,10 +174,12 @@ const StudentRoute = require("./routes/StudentRoute.js");
 const EnrollRoute = require("./routes/EnrollRoute.js");
 const PaymentRoute = require("./routes/PaymentRoute.js");
 const Contact = require("./routes/Contact.js");
-const EmailRoute = require("./routes/EmailRoute.js"); // New email route
+const EmailRoute = require("./routes/EmailRoute.js");
+ // New email route
+ const BlogRoutes = require("./routes/blogRoutes.js");
 const associateModels = require('./models/association.js');
 const Fees = require('./models/Fees.js'); // Add Fees model
-
+const Blog= require('./models/blog.js');
 const amountRoutes = require('./routes/AmountRoutes.js');
 const expensesRoutes = require('./routes/ExpensesRoutes.js');
 
@@ -237,7 +239,7 @@ app.use(EnrollRoute);
 app.use(PaymentRoute);
 app.use(Contact);
 app.use(EmailRoute); // Use the new email route
-
+app.use(BlogRoutes);
 app.use('/amount', amountRoutes);
 app.use('/expenses', expensesRoutes);
 
