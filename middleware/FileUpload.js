@@ -41,7 +41,8 @@ const uploadimage = multer({
     fileFilter: fileFilter
 }).fields([
     { name: 'image', maxCount: 1 },
-    { name: 'identityImage', maxCount: 1 }
+    { name: 'identityImage', maxCount: 1 },
+    { name: 'photo', maxCount: 1}
 ]);
 
 // Export the middleware functions

@@ -164,12 +164,14 @@ const defaultPassword = `${student.firstName}@${birthYear}`;
         // Check if Fees record exists
         let feesRecord = await Fees.findOne({ where: { enrollmentId: enrollment.enrollmentId }, transaction });
         if (!feesRecord) {
+            console.log(`adding due date to fee table`, paymentDetails.duedate);
             feesRecord = await Fees.create({
                 enrollmentId: enrollment.enrollmentId,
                 totalFees,
                 discount,
                 applicableFees,
-                balanceAmount: applicableFees
+                balanceAmount: applicableFees,
+                duedate: paymentDetails.duedate
             }, { transaction });
         } else {
             await feesRecord.update({ totalFees, discount, applicableFees }, { transaction });
@@ -508,7 +510,7 @@ exports.getAllEnrollments = async (req, res) => {
             },
             {
                 model: Fees,
-                attributes: ['applicableFees','balanceAmount'],
+                attributes: ['applicableFees','balanceAmount', 'duedate'],
                 required: true
             }
         ]

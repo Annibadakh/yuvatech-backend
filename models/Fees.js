@@ -115,6 +115,10 @@ const Fees = db.define('fees', {
         defaultValue: function() {
             return this.applicableFees; // Initially set to applicableFees
         }
+    },
+    duedate: {
+        type: DataTypes.DATEONLY,
+        allowNull: true // Allow null if dueDate is optional
     }
 }, {
     freezeTableName: true

@@ -175,13 +175,13 @@ const EnrollRoute = require("./routes/EnrollRoute.js");
 const PaymentRoute = require("./routes/PaymentRoute.js");
 const Contact = require("./routes/Contact.js");
 const EmailRoute = require("./routes/EmailRoute.js");
- // New email route
  const BlogRoutes = require("./routes/blogRoutes.js");
 const associateModels = require('./models/association.js');
 const Fees = require('./models/Fees.js'); // Add Fees model
 const Blog= require('./models/blog.js');
 const amountRoutes = require('./routes/AmountRoutes.js');
 const expensesRoutes = require('./routes/ExpensesRoutes.js');
+const dueDateRoutes = require('./routes/DueDateRoute.js'); 
 
 dotenv.config();
 require('dotenv').config();
@@ -227,10 +227,11 @@ app.use(cors({
 }));
 
 // Serve static files
+app.use("/uploads", express.static("uploads"));
 app.use(express.static("public"));
 
 // Routes
-app.use("/uploads", express.static("uploads")); // Serve uploads directory
+ // Serve uploads directory
 app.use(UserRoute);
 app.use(CourseRoute);
 app.use(AuthRoute);
@@ -242,20 +243,36 @@ app.use(EmailRoute); // Use the new email route
 app.use(BlogRoutes);
 app.use('/amount', amountRoutes);
 app.use('/expenses', expensesRoutes);
+app.use(dueDateRoutes);
 
 // Fallback route to serve index.html
 // app.get("*", (req, res) => {
 //     res.sendFile(__dirname + '/public/index.html');
 // });
 
+app.get('/data', (req, res) => {
+    const dummyData = {
+        id: 1,
+        name: 'John Doe',
+        role: 'Software Developer',
+        company: 'Tech Corp'
+    };
+
+    res.json(dummyData);
+});
+
 app.get('/', (req, res) => {
     res.send("from server side");
 });
 
 // Sync session store and start the server
-store.sync().then(() => {
-    const PORT = process.env.APP_PORT || 3000;
-    app.listen(PORT, () => {
-        console.log(`Server up and running on port ${PORT}`);
-    });
+// store.sync().then(() => {
+//     const PORT = process.env.APP_PORT || 3000;
+//     app.listen(PORT, () => {
+//         console.log(`Server up and running on port ${PORT}`);
+//     });
+// });
+
+app.listen(process.env.APP_PORT, () => {
+    console.log('Server up and running...');
 });

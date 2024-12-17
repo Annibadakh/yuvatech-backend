@@ -158,7 +158,7 @@ const Fees = require('../models/Fees.js');
 
 exports.createPayment = async (req, res) => {
     try {
-        const { enrollmentId, amount, paymentMethod ,notes} = req.body;
+        const { enrollmentId, amount, paymentMethod,notes, duedate} = req.body;
         const createdBy = req.user.uuid;
         const createdByName = req.user.name;
 
@@ -214,7 +214,7 @@ exports.createPayment = async (req, res) => {
         });
 
         // Update Fees table's balanceAmount
-        await Fees.update({ balanceAmount: newBalance }, {
+        await Fees.update({ balanceAmount: newBalance, duedate: duedate }, {
             where: { enrollmentId },
             returning: true
         });
@@ -232,7 +232,7 @@ exports.createPaymentEnrollment = async (req, res, parentTransaction = null) => 
     console.log(req.body);
 
     try {
-        const { enrollmentId, amount, paymentMethod, notes } = req.body;
+        const { enrollmentId, amount, paymentMethod, notes, duedate } = req.body;
         const createdBy = req.user.uuid;
         const createdByName = req.user.name;
 
@@ -411,7 +411,7 @@ exports.checkIfDiscountGiven = async (enrollmentId) => {
 
 exports.updatePayment = async (req, res) => {
     const { paymentId } = req.params;
-    const { amount, paymentDate, paymentMethod } = req.body;
+    const { amount, paymentDate, paymentMethod, duedate } = req.body;
 
     try {
         // Find the payment by ID
@@ -446,7 +446,7 @@ exports.updatePayment = async (req, res) => {
         });
 
         // Update the Fees record's balanceAmount
-        await Fees.update({ balanceAmount: newBalanceAmount }, {
+        await Fees.update({ balanceAmount: newBalanceAmount, duedate: duedate }, {
             where: { enrollmentId: payment.enrollmentId }
         });
 
@@ -692,6 +692,7 @@ exports.getPaymentById = async (req, res) => {
                     model: Enrollment,
                     include: [
                         { model: Course, attributes: ['name'] },
+                        { model: Fees, attributes: ['duedate'] },
                         { model: Student, attributes: ['firstName', 'middleName', 'lastName',`addressLine1`,'addressLine2','city','taluka','district','state','pincode'] }
                     ]
                 }
@@ -714,6 +715,7 @@ exports.getPaymentById = async (req, res) => {
         let courseName = null;
         let studentName = null;
         let address = null;
+        let duedate = '';
 
         if (payment.enrollment && payment.enrollment.course) {
             courseName = payment.enrollment.course.name;
@@ -723,6 +725,11 @@ exports.getPaymentById = async (req, res) => {
             const student = payment.enrollment.student;
             studentName = `${student.firstName} ${student.middleName ? student.middleName + ' ' : ''}${student.lastName}`;
             address = `${student.addressLine1 || ''}, ${student.addressLine2 || ''}, ${student.city || ''},   PIN-${student.pincode || ''}, TAL-${student.taluka || ''}, DIST- ${student.district || ''},${student.state || ''}, ${student.country || ''}`.replace(/, ,/g, ',').replace(/, $/, '');
+        }
+
+        if (payment.enrollment && payment.enrollment.Fees) {
+            duedate = payment.enrollment.Fees.duedate;
+            console.log("fees duedate", duedate);
         }
 
         // Constructing response object
@@ -739,7 +746,8 @@ exports.getPaymentById = async (req, res) => {
             updatedAt,
             courseName,
             studentName,
-            address
+            address,
+            duedate: duedate,
         };
 
         res.status(200).json(response);
